@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1637368172 source:c:\users\mohammed\desktop\index\youcode_c\project-sas-2021\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
