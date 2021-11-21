@@ -8,7 +8,7 @@ int main()
 {
         bool compte = false;// if false print the warning message to enter acounte first...
 
-        int n = 0;
+        int n = 0; // number of acounts.
         char** nomePrenome;
         char** cin;
         int* montant;
@@ -22,17 +22,16 @@ int main()
         if(compte != true){
             printf("\n\t\t\t\033[0;41m-Attention:\033[0;31m vous dovez premierment entrer un ou plusier comptes.\033[0m"); //pintf le condition qui est important. warning to enter acount first.
         }
-        int choixMenu;
-        printf("\n\n  choisi l\'opperation que tu veux : ");
+        int choixMenu;// stocker le menu choix du client.
+        printf("\n\n  choisi l'opperation que tu veux : ");
         scanf("%d", &choixMenu);
 
 
-        if (choixMenu < 0 || choixMenu > 7){ // start again if the input is not much with the menu using while loop.
-            while(choixMenu < 0 || choixMenu > 7){
-                printf("le choix que tu a entrer est pas dans le menu. voller essayer autre fois : ");
-                scanf("%d", &choixMenu);
-            }
+        while(choixMenu < 0 || choixMenu > 7){ // start again if the input is not much with the menu using while loop.
+            printf("le choix que tu a entrer est pas dans le menu. voller essayer autre fois : ");
+            scanf("%d", &choixMenu);
         }
+
 
         if(choixMenu == 1){
             n = 1;
@@ -79,6 +78,7 @@ int main()
                 nomePrenome[i] = malloc(sizeof(char) * 20);
                 cin[i] = malloc(sizeof(char) * 20);
             }
+
             for(int i = 0 ; i < n ; i++){ // entrer les comptes
                 printf("\nvoller entrer le Nome et le Prenome du compte N %d svp : ", i+1);
                 scanf("\n");
@@ -106,7 +106,7 @@ int main()
 
 
         } else if(choixMenu == 3){
-            if (n == 0){// reteur au menu si il y a pas du comptes.
+            if (n <= 0){// reteur au menu si il y a pas du comptes.
                 printf("\n\a\033[0;31m\t!!!tu doit enregistre un aux plusieur comptes pour cette operation.\033[0m\n");
                 system("pause");
                 goto start;
@@ -116,14 +116,12 @@ int main()
             printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
             printf("\t1-Retrait.\n\t2-Depot.\n\t3-Reteur au menu.\n");
             int operationsMenu; // variable that store client's choice on 3)Opérations (Retrait-Dépôt).
-            printf("\n\nchoisi l\'opperation que tu veux : ");
+            printf("\n\nchoisi l'opperation que tu veux : ");
             scanf("%d", &operationsMenu);
 
-            if (operationsMenu < 0 || operationsMenu > 3){ // start again if the input is not much with the Opérations menu using while loop.
-                while(operationsMenu < 0 || operationsMenu > 3){
-                    printf("le choix que tu a entre est pas dans le menu. voller essayer autre fois : ");
-                    scanf("%d", &operationsMenu);
-                }
+            while(operationsMenu < 0 || operationsMenu > 3){ // start again if the input is not much with the Opérations menu using while loop.
+                printf("le choix que tu a entre est pas dans le menu. voller essayer autre fois : ");
+                scanf("%d", &operationsMenu);
             }
 
             if(operationsMenu == 1){
@@ -134,7 +132,7 @@ int main()
                     printf("\n--------------------------------------------------------------\n\n");
                     int retrait;
                     bool retraitValable = true;
-                     while(retraitValable) {
+                    while(retraitValable) {
                         printf("Entrer le montant que tu veux retirai dans le compte : ");
                         scanf("%d", &retrait);// store the amount from the client.
                         if(retrait > 0 && retrait <= montant[0]) {// checking if the input is correct.
@@ -149,7 +147,7 @@ int main()
                         }
                     }
 
-                    // display le dernier donner de compte avec le retrait.
+                    // display la dernier version du compte avec le retrait.
                     system("cls");
                     printf("\n\n\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0;33m *Nouveau Montant\033[0m\n",nomePrenome[0], cin[0], montant[0]);
                     printf("\n\t\033[0;31mRetrait : %dDH.\033[0m", retrait);
@@ -296,10 +294,8 @@ int main()
             } else if(operationsMenu == 3){
                 goto start;
             }
-            system("pause");
-            goto start;
-            //************************** end of the Operation ***********************************
 
+            //************************** end of the Operation ***********************************
 
         } else if(choixMenu == 4){
             if (n < 2){// reteur au menu si il y a pas des comptes.
@@ -315,12 +311,11 @@ int main()
             printf("\n\n  choisi l\'opperation que tu veux : ");
             scanf("%d" ,&affichageMenu);
 
-            if (affichageMenu < 0 || affichageMenu > 4){ // start again if the input is not much with the Affichage menu using while loop.
-                while(affichageMenu < 0 || affichageMenu > 4){
-                    printf("le choix que tu a entre est pas dans le menu. voller essayer autre fois : ");
-                    scanf("%d", &affichageMenu);
-                }
+            while(affichageMenu < 0 || affichageMenu > 4){ // start again if the input is not much with the Affichage menu using while loop.
+                printf("le choix que tu a entre est pas dans le menu. voller essayer autre fois : ");
+                scanf("%d", &affichageMenu);
             }
+
             if(affichageMenu == 1){//tri par Ascendant partie.
                 system("cls");
                 printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
@@ -367,15 +362,18 @@ int main()
                     // display the new list of acounts with sorting (tri Ascendant).
                     system("cls");
                     printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
-                    printf("\n le compte que tu entrer : \n\n");
+
                     for(int i = 0 ; i < n ; i++){ // display les comptes qui est enregistrer.
                         printf("Compte N%d :\n", i + 1);
                         printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                         printf("--------------------------------------------------------------\n");
                     }
-                    printf("  Clicker entrer pour retour ou la menu.\n");
+                    printf("  Clicker entrer pour retour ou menu.\n");
                     system("pause");
                     goto start;
+
+                } else if (triChoix == 2){
+
                 }
 
 
@@ -414,6 +412,7 @@ int main()
                         printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                         printf("\n--------------------------------------------------------------\n\n");
                         isDoneRecherche = true;
+                        break;
                     }
                 }
                 if(isDoneRecherche == false){
@@ -442,8 +441,7 @@ int main()
             } else if(affichageMenu == 4){
                 goto start;
             }
-            system("pause");
-            goto start;
+
             //*************************************************************
 
 
@@ -463,19 +461,17 @@ int main()
             printf("\n\n  choisi l'opperation que tu veux : ");
             scanf("%d", &fidelisationMenu);
 
-            if (fidelisationMenu < 0 || fidelisationMenu > 4){ // start again if the input is not much with the Fidélisation menu using while loop.
-                while(fidelisationMenu < 0 || fidelisationMenu > 4){
-                    printf("\033[0;31m  le choix que tu a entre est pas dans le menu.\033[0m\nvoller essayer autre fois : ");
-                    scanf("%d", &fidelisationMenu);
-                }
+            while(fidelisationMenu < 0 || fidelisationMenu > 2){  // start again if the input is not much with the Fidélisation menu using while loop.
+                printf("\033[0;31m  le choix que tu a entre est pas dans le menu.\033[0m\nvoller essayer autre fois : ");
+                scanf("%d", &fidelisationMenu);
             }
+
             if(fidelisationMenu == 1){
                 printf("  tu choisi Ajouter 1.3%% aux comptes ayant les 3 premiers montants superieurs operation.\n");
             } else if(fidelisationMenu == 2){
                 goto start;
             }
-            system("pause");
-            goto start;
+
             //*************************************************************
 
 
