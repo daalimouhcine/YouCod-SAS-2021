@@ -343,19 +343,18 @@ int main()
                         for(int j = i ; j < n ; j++){
                             if(minMontant > montant[j]){// check for the minimun acount.
                                 minMontant = montant[j];
-
-                                // switch the acount with hes new index (position).
                                 minNomePrenome = nomePrenome[j];
                                 minCin = cin[j];
 
+                                // switch the acount with hes new index (position).
                                 montant[j] = montant[i];
                                 montant[i] = minMontant;
 
-                                nomePrenome[j] = nomePrenome[i];
-                                nomePrenome[i] = minNomePrenome;
-
                                 cin[j] = cin[i];
                                 cin[i] = minCin;
+
+                                nomePrenome[j] = nomePrenome[i];
+                                nomePrenome[i] = minNomePrenome;
                             }
                         }
                     }
@@ -373,6 +372,9 @@ int main()
                     goto start;
 
                 } else if (triChoix == 2){
+                    printf("\n  Entrer le montant pour trier les comptes qui ayant ce montant : ");
+                    int montantTri;
+                    scanf("%d", &montantTri);
 
                 }
 
@@ -393,7 +395,34 @@ int main()
                 }
 
                 if(triChoix == 1){
+                    char maxNomePrenome;
+                    char maxCin;
+                    int maxMontant;
 
+                    for(int i = 0 ; i < n ; i++){
+                        maxMontant = montant[i];
+
+                        for(int j = i ; j < n ; j++){
+                            if(maxMontant < montant[j]){
+                                // store the small acount
+                                maxMontant = montant[j];
+                                maxNomePrenome = nomePrenome[j];
+                                maxCin = cin[j];
+
+                                // switch the acount with hes new index (position).
+                                nomePrenome[j] = nomePrenome[i];
+                                nomePrenome[i] = maxNomePrenome;
+
+                                cin[j] = cin[i];
+                                cin[i] = maxCin;
+
+                                montant[j] = montant[i];
+                                montant[i] = maxMontant;
+
+
+                            }
+                        }
+                    }
                 }
 
 
@@ -449,11 +478,18 @@ int main()
 
 
         } else if(choixMenu == 5){
+            bool usFidelisation = false;// check if he allredy use this promo.
             if (n < 2){// reteur au menu si il y a pas des comptes.
                 printf("\n\a\033[0;31m\t!!!tu doit enregistre plusieur comptes pour cette operation.\033[0m\n");
                 system("pause");
                 goto start;
+
+            } else if (!usFidelisation){
+                printf("\n tu est deja utiliser cette promo.\n");
+                system("pause");
+                goto start;
             }
+
             system("cls");
             printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
             printf("\t1-Ajouter 1.3%% aux comptes ayant les 3 premiers montants superieurs.\n\t2-Reteur au menu.\n");
@@ -467,7 +503,10 @@ int main()
             }
 
             if(fidelisationMenu == 1){
-                printf("  tu choisi Ajouter 1.3%% aux comptes ayant les 3 premiers montants superieurs operation.\n");
+                int a; // store the 3 beeg acounts.
+                for()
+
+
             } else if(fidelisationMenu == 2){
                 goto start;
             }
