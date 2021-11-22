@@ -7,6 +7,8 @@
 int main()
 {
         bool compte = false;// if false print the warning message to enter acounte first...
+        bool usFidelisation = false;// check if he all ready use this promo.
+
 
         int n = 0; // number of accounts.
         char** nomePrenome;
@@ -582,7 +584,6 @@ int main()
 
 
         } else if(choixMenu == 5){
-            bool usFidelisation = false;// check if he allredy use this promo.
             if (n < 2){// reteur au menu si il y a pas des comptes.
                 printf("\n\a\033[0;31m\t!!!tu doit enregistre plusieur comptes pour cette operation.\033[0m\n");
                 system("pause");
@@ -607,51 +608,89 @@ int main()
             }
 
             if(fidelisationMenu == 1){
-                int a = 3;
                 // variables pour enregistrer les maximum accounts apres chaque tour de bocle.
-                int maxMontant;
-                int maxMontantII = 0;
-                int pos;
+                    int maxNomePrenome;
+                    int maxCin;
+                    int maxMontant;
 
+                    for(int i = 0 ; i < n ; i++){
+                        maxMontant = montant[i];
+                        maxNomePrenome = nomePrenome[i];
+                        maxCin = cin[i];
 
-                for(int i = 0 ; i < n ; i++){
-                    maxMontant = montant[i];
-                    pos = i;
+                        for(int j = i ; j < n ; j++){
+                            if(maxMontant < montant[j]){// check for the maximum account.
+                                maxMontant = montant[j];
+                                maxNomePrenome = nomePrenome[j];
+                                maxCin = cin[j];
 
-                    for(int j = i ; j < n ; j++){
-                        if(maxMontant < montant[j] ){// ??????????
-                            maxMontant = montant[j];
-                            pos = j;
+                                // switch the account with hes new index (position).
+                                montant[j] = montant[i];
+                                montant[i] = maxMontant;
+
+                                cin[j] = cin[i];
+                                cin[i] = maxCin;
+
+                                nomePrenome[j] = nomePrenome[i];
+                                nomePrenome[i] = maxNomePrenome;
+                            }
                         }
                     }
-                    if(maxMontant == maxMontantII) {
-                        montant[pos] += (montant[pos] * 0.013);
+                    // add 1.3% to the big 3 accounts.
 
-                    } else {
-                        montant[pos] += (montant[pos] * 0.013);
-                        maxMontantII = maxMontant;
-                        a--;
-                    }
+                    if(n <= 3){ // if there is 3 or less accounts.
+                        for(int i = 0 ; i < n ; i++){
+                            montant[i] *= 1.013;
+                        }
+                        system("cls");
+                        printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
+                        printf("\n");
+                        for(int i = 0 ; i < n ; i++){ // display les comptes qui ont ajouter la Fedelisation.
+                            printf("Compte N%d :\n", i + 1);
+                            printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
+                            printf("\n\t\033[0;32mFidelisation : +%dDH.\033[0m\n\n", montant[i]/1.013);
+                            printf("--------------------------------------------------------------\n");
+                        }
 
-                    if(a == 0){
-                        break;
+
+                    } else { // if there is more than 3 accounts.
+                        int a = 3;
+                        int numOfFidelisation = 0; // numero du comptes qui ajoute le montant de fedelisation.
+                        int maxIndexFidelisation = 0;
+                        while(a > 0){
+                            if(montant[maxIndexFidelisation] == montant[maxIndexFidelisation + 1]){// check if there is an account with same amount of mony.
+                                montant[maxIndexFidelisation] *= 1.013;
+                            } else{
+                                montant[maxIndexFidelisation] *= 1.013;
+                                a--;
+                            }
+                            numOfFidelisation++;
+                            maxIndexFidelisation++;
+                        }
+                        system("cls");
+                        printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
+                        printf("\n");
+                        for(int i = 0 ; i < numOfFidelisation ; i++){ // display les comptes qui ont ajouter la Fedelisation.
+                            printf("Compte N%d :\n", i + 1);
+                            printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
+                            printf("\n\t\033[0;32mFidelisation : +%dDH.\033[0m\n\n", montant[i]/1.013);
+                            printf("--------------------------------------------------------------\n");
+                        }
+
                     }
+                    usFidelisation = true;
+                    system("pause");
+                    goto start;
+
+                    // ==== ent fedelisation part ====
+
+                } else if(fidelisationMenu == 2){
+                    goto start;
                 }
 
-                usFidelisation = true;
-                system("cls");
-                printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
-                printf("\n");
-                for(int i = 0 ; i < n ; i++){ // display les comptes qui ont enregistrer.
-                    printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
-                    printf("--------------------------------------------------------------\n");
-
-                }
 
 
-            } else if(fidelisationMenu == 2){
-                goto start;
-            }
+
 
             //*************************************************************
 
@@ -697,7 +736,7 @@ int main()
 
 
 
-
+// I NEED TO USE FLOAT OR DOUBLE .
 
 
 
