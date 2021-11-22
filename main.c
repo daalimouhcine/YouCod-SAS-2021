@@ -648,7 +648,7 @@ int main()
                         for(int i = 0 ; i < n ; i++){ // display les comptes qui ont ajouter la Fedelisation.
                             printf("Compte N%d :\n", i + 1);
                             printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
-                            printf("\n\t\033[0;32mFidelisation : +%dDH.\033[0m\n\n", montant[i]/1.013);
+                            printf("\n\t\033[0;32mFidelisation : +%dDH.\033[0m\n\n", montant[i] - (montant[i]/1.013));
                             printf("--------------------------------------------------------------\n");
                         }
 
@@ -673,7 +673,7 @@ int main()
                         for(int i = 0 ; i < numOfFidelisation ; i++){ // display les comptes qui ont ajouter la Fedelisation.
                             printf("Compte N%d :\n", i + 1);
                             printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
-                            printf("\n\t\033[0;32mFidelisation : +%dDH.\033[0m\n\n", montant[i]/1.013);
+                            printf("\n\t\033[0;32mFidelisation : +%dDH.\033[0m\n\n", montant[i] - (montant[i]/1.013));
                             printf("--------------------------------------------------------------\n");
                         }
 
