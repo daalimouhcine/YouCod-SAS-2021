@@ -2,16 +2,54 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <string.h>
 
 
-int main()
-{
+int n = 0; // number of accounts.
+char** nomePrenome;
+char** cin;
+int* montant;
+
+
+
+void triComptes(){
+      // variables pour enregistrer les accounts apres chaque tour de bocle pour le triage.
+    char triNomePrenome[20];
+    char triCin[20];
+    int triMontant;
+
+    for (int i = n-1 ; i >= 0 ; i--){
+        strcpy(triNomePrenome, nomePrenome[i]);
+        strcpy(triCin, cin[i]);
+        triMontant = montant[i];
+
+
+        for(int j = i ; j >= 0; j--){
+            if(triMontant > montant[j]){
+                strcpy(triNomePrenome, nomePrenome[j]);
+                strcpy(triCin, cin[j]);
+                triMontant = montant[j];
+
+                strcpy(nomePrenome[j], nomePrenome[i]);
+                strcpy(nomePrenome[i], triNomePrenome);
+
+                strcpy(cin[j], cin[i]);
+                strcpy(cin[i], triCin);
+
+                montant[j] = montant[i];
+                montant[i] = triMontant;
+
+            }
+        }
+    }
+}
+
+
+int main() {
+
         bool compte = false;// if false print the warning message to enter acounte first...
+        bool usFidelisation = false;// check if he all ready use this promo.
 
-        int n = 0; // number of accounts.
-        char** nomePrenome;
-        char** cin;
-        int* montant;
 
 
         start:
@@ -297,6 +335,9 @@ int main()
 
             //************************** end of the Operation ***********************************
 
+
+
+
         } else if(choixMenu == 4){
             if (n < 2){// reteur au menu si il y a pas des comptes.
                 printf("\n\a\033[0;31m\t!!!tu doit enregistre plusieur comptes pour cette operation.\033[0m\n");
@@ -330,40 +371,13 @@ int main()
                 }
 
                 if(triChoix == 1){
-                    // variables pour enregistrer les minimum accounts apres chaque tour de bocle.
-                    int minNomePrenome;
-                    int minCin;
-                    int minMontant;
-
-                    for(int i = 0 ; i < n ; i++){
-                        minMontant = montant[i];
-                        minNomePrenome = nomePrenome[i];
-                        minCin = cin[i];
-
-                        for(int j = i ; j < n ; j++){
-                            if(minMontant > montant[j]){// check for the minimum account.
-                                minMontant = montant[j];
-                                minNomePrenome = nomePrenome[j];
-                                minCin = cin[j];
-
-                                // switch the account with hes new index (position).
-                                montant[j] = montant[i];
-                                montant[i] = minMontant;
-
-                                cin[j] = cin[i];
-                                cin[i] = minCin;
-
-                                nomePrenome[j] = nomePrenome[i];
-                                nomePrenome[i] = minNomePrenome;
-                            }
-                        }
-                    }
+                    // call the sorting function.
+                    triComptes();
                     // display the new list of accounts with sorting (tri Ascendant).
                     system("cls");
                     printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
-
-                    for(int i = 0 ; i < n ; i++){ // display les comptes qui est enregistrer.
-                        printf("Compte N%d :\n", i + 1);
+                    for(int i = n-1 ; i >= 0 ; i--){ // display les comptes qui est enregistrer.
+                        printf("Compte N%d :\n", x);
                         printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                         printf("--------------------------------------------------------------\n");
                     }
@@ -371,10 +385,31 @@ int main()
                     system("pause");
                     goto start;
 
+                    //---------------------------------------------------------------------------------
+
                 } else if (triChoix == 2){
                     printf("\n  Entrer le montant pour trier les comptes qui ayant ce montant : ");
                     int montantTri;
                     scanf("%d", &montantTri);
+                    // call the sorting function.
+                    triComptes("ascendant");
+                    // display the new list of accounts with sorting (tri Ascendant).
+                    system("cls");
+                    printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
+                    int x = 1; // numero du compte.
+                    for(int i = n-1 ; i >= 0 ; i--){ // display les comptes qui est enregistrer.
+                        if(montant[i] >= montantTri){ // check if the amount is biger of the amount that the client inter'd.
+                            printf("Compte N%d :\n", x);
+                            printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                            printf("--------------------------------------------------------------\n");
+                            x++;
+                        } else {
+                            break;
+                        }
+                    }
+                    printf("  Clicker entrer pour retour ou menu.\n");
+                    system("pause");
+                    goto start;
 
                 }
 
@@ -395,35 +430,9 @@ int main()
                 }
 
                 if(triChoix == 1){
-                    // variables pour enregistrer les maximum accounts apres chaque tour de bocle.
-                    int maxNomePrenome;
-                    int maxCin;
-                    int maxMontant;
-
-                    for(int i = 0 ; i < n ; i++){
-                        maxMontant = montant[i];
-                        maxNomePrenome = nomePrenome[i];
-                        maxCin = cin[i];
-
-                        for(int j = i ; j < n ; j++){
-                            if(maxMontant < montant[j]){// check for the maximum account.
-                                maxMontant = montant[j];
-                                maxNomePrenome = nomePrenome[j];
-                                maxCin = cin[j];
-
-                                // switch the account with hes new index (position).
-                                montant[j] = montant[i];
-                                montant[i] = maxMontant;
-
-                                cin[j] = cin[i];
-                                cin[i] = maxCin;
-
-                                nomePrenome[j] = nomePrenome[i];
-                                nomePrenome[i] = maxNomePrenome;
-                            }
-                        }
-                    }
-                     // display the new list of accounts with sorting (tri Descendant).
+                    // call the sorting function.
+                    triComptes();
+                    // display the new list of accounts with sorting (tri Descendant).
                     system("cls");
                     printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
 
@@ -435,6 +444,31 @@ int main()
                     printf("  Clicker entrer pour retour ou menu.\n");
                     system("pause");
                     goto start;
+
+                    //---------------------------------------------------------------
+
+                } else if (triChoix == 2){
+                    printf("\n  Entrer le montant pour trier les comptes qui ayant ce montant : ");
+                    int montantTri;
+                    scanf("%d", &montantTri);
+                    // call the sorting function.
+                    triComptes();
+                    // display the new list of accounts with sorting (tri Descendant).
+                    system("cls");
+                    printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
+                    for(int i = 0 ; i < n ; i++){ // display les comptes qui est enregistrer.
+                        if(montant[i] >= montantTri){
+                            printf("Compte N%d :\n", i + 1);
+                            printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                            printf("--------------------------------------------------------------\n");
+                        } else {
+                            break;
+                        }
+                    }
+                    printf("  Clicker entrer pour retour ou menu.\n");
+                    system("pause");
+                    goto start;
+
                 }
 
 
@@ -490,13 +524,12 @@ int main()
 
 
         } else if(choixMenu == 5){
-            bool usFidelisation = false;// check if he allredy use this promo.
             if (n < 2){// reteur au menu si il y a pas des comptes.
                 printf("\n\a\033[0;31m\t!!!tu doit enregistre plusieur comptes pour cette operation.\033[0m\n");
                 system("pause");
                 goto start;
 
-            } else if (!usFidelisation){
+            } else if (usFidelisation){
                 printf("\n tu est deja utiliser cette promo.\n");
                 system("pause");
                 goto start;
@@ -515,12 +548,60 @@ int main()
             }
 
             if(fidelisationMenu == 1){
-                int a; // store the 3 beeg acounts.
+                // call the sorting function.
+                triComptes();
+                // add 1.3% to the big 3 accounts.
+                if(n <= 3){ // if there is 3 or less accounts.
+                    for(int i = 0 ; i < n ; i++){
+                        montant[i] *= 1.013;
+                    }
+                    system("cls");
+                    printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
+                    printf("\n");
+                    for(int i = 0 ; i < n ; i++){ // display les comptes qui ont ajouter la Fedelisation.
+                        printf("Compte N%d :\n", i + 1);
+                        printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
+                        printf("\n\t\033[0;32mFidelisation : +%dDH.\033[0m\n\n", (montant[i]/1.013) - montant[i]);
+                        printf("--------------------------------------------------------------\n");
+                    }
+
+                } else { // if there is more than 3 accounts.
+                    int a = 3;
+                    int numOfFidelisation = 0; // numero du comptes qui ajoute le montant de fedelisation.
+                    int maxIndexFidelisation = 0;
+                    while(a > 0){
+                        if(montant[maxIndexFidelisation] != montant[maxIndexFidelisation + 1]){// check if there is an account with same amount of mony.
+                            a--;
+                        }
+                        montant[maxIndexFidelisation] *= 1.013;
+
+                        numOfFidelisation++;
+                        maxIndexFidelisation++;
+                    }
+                    system("cls");
+                    printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
+                    printf("\n");
+                    for(int i = 0 ; i < numOfFidelisation ; i++){ // display les comptes qui ont ajouter la Fedelisation.
+                        printf("Compte N%d :\n", i + 1);
+                        printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
+                        printf("\n\t\033[0;32mFidelisation : +%dDH.\033[0m\n\n", montant[i] - (montant[i]/1.013));
+                        printf("--------------------------------------------------------------\n");
+                    }
+
+                }
+                    usFidelisation = true;
+                    system("pause");
+                    goto start;
+
+                    // ==== ent fedelisation part ====
+
+                } else if(fidelisationMenu == 2){
+                    goto start;
+                }
 
 
-            } else if(fidelisationMenu == 2){
-                goto start;
-            }
+
+
 
             //*************************************************************
 
@@ -566,11 +647,11 @@ int main()
 
 
 
-
-
-
-
+// I NEED TO USE FLOAT OR DOUBL
 
 
     return 0;
 }
+
+
+
