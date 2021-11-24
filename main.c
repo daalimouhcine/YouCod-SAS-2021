@@ -10,8 +10,6 @@ char** nomePrenome;
 char** cin;
 float* montant;
 
-
-
 void triComptes(){
       // variables pour enregistrer les accounts apres chaque tour de bocle pour le triage.
     char triNomePrenome[20];
@@ -52,14 +50,10 @@ void affichageComptes(){
     }
 }
 
-
 int main() {
-
 
         bool compte = false;// if false print the warning message to enter accounte first...
         bool usFidelisation = false;// check if he all ready use this promo.
-
-
 
         start:
         system("cls");
@@ -79,7 +73,7 @@ int main() {
             scanf("%d", &choixMenu);
         }
 
-
+                                                                //########## 1
         if(choixMenu == 1){
             if(n == 0){
                 n = 1;
@@ -142,8 +136,7 @@ int main() {
             system("pause");
             goto start;
 
-
-
+                                                                //########## 2
 
         } else if(choixMenu == 2){
             if(n == 0){
@@ -213,6 +206,7 @@ int main() {
             system("pause");
             goto start;
 
+                                                                //########## 3
 
         } else if(choixMenu == 3){
             if (n <= 0){// reteur au menu si il y a pas du comptes.
@@ -401,10 +395,10 @@ int main() {
                 goto start;
             }
 
-            //************************** end of the Operation ***********************************
+            //************************** end of the Operation **********************************
 
 
-
+                                                                //########## 4
 
         } else if(choixMenu == 4){
             if (n < 2){// reteur au menu si il y a pas des comptes.
@@ -535,8 +529,6 @@ int main() {
                     goto start;
                 }
 
-
-
             } else if (affichageMenu == 3){
                 chercherAutrefois:
                 system("cls");
@@ -583,9 +575,7 @@ int main() {
 
             //*************************************************************
 
-
-
-
+                                                                //########## 5
 
         } else if(choixMenu == 5){
             if (n < 2){// reteur au menu si il y a pas des comptes.
@@ -663,14 +653,10 @@ int main() {
                     goto start;
                 }
 
-
-
-
-
             //*************************************************************
 
 
-
+                                                                //########## 6
 
         } else if (choixMenu == 6){
             if (n == 0){// reteur au menu si il y a pas des comptes.
@@ -686,7 +672,7 @@ int main() {
             system("pause");
             goto start;
 
-
+                                                                //########## 7
         }  else if(choixMenu == 7){
             printf("\n\n\t\t\t\t\033[0;34m****** you exite\'s from the programe ******\033[0m\n");
             return 1;
