@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -8,7 +9,7 @@
 int n = 0; // number of accounts.
 char** nomePrenome;
 char** cin;
-int* montant;
+float* montant;
 
 
 
@@ -16,7 +17,7 @@ void triComptes(){
       // variables pour enregistrer les accounts apres chaque tour de bocle pour le triage.
     char triNomePrenome[20];
     char triCin[20];
-    int triMontant;
+    float triMontant;
 
     for (int i = n-1 ; i >= 0 ; i--){
         strcpy(triNomePrenome, nomePrenome[i]);
@@ -76,7 +77,7 @@ int main() {
             // allocat memory for the arrays.
             nomePrenome = malloc(sizeof(char*) * n);
             cin = malloc(sizeof(char*) * n);
-            montant = malloc(sizeof(int) * n);
+            montant = malloc(sizeof(float) * n);
             for(int i = 0 ; i < n ; i++){
                 nomePrenome[i] = malloc(sizeof(char) * 20);
                 cin[i] = malloc(sizeof(char) * 20);
@@ -91,11 +92,11 @@ int main() {
             scanf("%[^\n]s", cin[0]); // registre le CIN du compte bancaire;
 
             printf("\nvoller entrer le Montant du compte svp : ");
-            scanf("%d", &montant[0]); // registre le montant du compte bancaire;
+            scanf("%f", &montant[0]); // registre le montant du compte bancaire;
 
             system("cls");
             printf("le compte que tu entrer : \n");
-            printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n", nomePrenome[0], cin[0], montant[0]);
+            printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n", nomePrenome[0], cin[0], montant[0]);
             printf("le compte est regestrer, clicker entrer pour retour a la menu.\n");
 
             compte = true;// turn variable true if there is atleast one acount;
@@ -111,7 +112,7 @@ int main() {
             // allocat memory for the arrays.
             nomePrenome = malloc(sizeof(char*) * n);
             cin = malloc(sizeof(char*) * n);
-            montant = malloc(sizeof(int) * n);
+            montant = malloc(sizeof(float) * n);
             for(int i = 0 ; i < n ; i++){
                 nomePrenome[i] = malloc(sizeof(char) * 20);
                 cin[i] = malloc(sizeof(char) * 20);
@@ -127,18 +128,19 @@ int main() {
                 scanf("%[^\n]s", cin[i]); // registre le CIN du dcompte bancaire;
 
                 printf("\nvoller entrer le Montant du compte N %d svp : ", i+1);
-                scanf("%d", &montant[i]); // registre le montant du dcompte bancaire;
+                scanf("%f", &montant[i]); // registre le montant du dcompte bancaire;
                 printf("\n\033[0;32m--------------------------le compte a ete registrer-------------------------\033[0m\n");
             }
             system("cls");
             printf("les comptes que tu entrer : \n\n");
             for(int i = 0 ; i < n ; i++){// display les comptes
                 printf("Compte N%d :\n", i + 1);
-                printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                 printf("--------------------------------------------------------------\n");
             }
             printf("le compte est regestrer, clicker entrer pour retour ou la menu.\n");
             compte = true; // turn variable true if ther is atleas one compte;
+            usFidelisation = false; // turn variable false because may add an account that have to add the fedelisation.
             system("pause");
             goto start;
 
@@ -166,13 +168,13 @@ int main() {
                 if(n == 1){// if there is only one account. Retrait
                     system("cls");
                     printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
-                    printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n", nomePrenome[0], cin[0], montant[0]);
+                    printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n", nomePrenome[0], cin[0], montant[0]);
                     printf("\n--------------------------------------------------------------\n\n");
-                    int retrait;
+                    float retrait;
                     bool retraitValable = true;
                     while(retraitValable) {
                         printf("Entrer le montant que tu veux retirai dans le compte : ");
-                        scanf("%d", &retrait);// store the amount from the client.
+                        scanf("%f", &retrait);// store the amount from the client.
                         if(retrait > 0 && retrait <= montant[0]) {// checking if the input is correct.
                             montant[0] -= retrait;
                             retraitValable = false;
@@ -187,8 +189,8 @@ int main() {
 
                     // display la dernier version du compte avec le retrait.
                     system("cls");
-                    printf("\n\n\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0;33m *Nouveau Montant\033[0m\n",nomePrenome[0], cin[0], montant[0]);
-                    printf("\n\t\033[0;31mRetrait : %dDH.\033[0m", retrait);
+                    printf("\n\n\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\033[0;33m *Nouveau Montant\033[0m\n",nomePrenome[0], cin[0], montant[0]);
+                    printf("\n\t\033[0;31mRetrait : %.2fDH.\033[0m", retrait);
                     printf("\n--------------------------------------------------------------\n");
                     system("pause");
                     goto start;
@@ -199,7 +201,7 @@ int main() {
                     printf("\n\n");
                     for(int i = 0 ; i < n ; i++){ // display les comptes qui ont enregistrer.
                         printf("Compte N%d :\n", i + 1);
-                        printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                        printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                         printf("--------------------------------------------------------------\n");
                     }
                     int numCompte;
@@ -211,11 +213,11 @@ int main() {
                         scanf("%d", &numCompte);
                     }
                     numCompte--;
-                    int retrait;
+                    float retrait;
                     bool retraitValable = true;
                      while(retraitValable) {
                         printf("Entrer le montant que tu veux retirai dans ce compte : ");
-                        scanf("%d", &retrait);// store the amount from the client.
+                        scanf("%f", &retrait);// store the amount from the client.
                         if(retrait > 0 && retrait <= montant[numCompte]) {// checking if the input is correct.
                             montant[numCompte] -= retrait;
                             retraitValable = false;
@@ -233,11 +235,11 @@ int main() {
                     for(int i = 0 ; i < n ; i++){ // display les comptes qui ont enregistrer.
                         printf("Compte N%d :\n", i + 1);
                         if(i == numCompte){
-                            printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0;33m *Nouveau Montant\033[0m\n",nomePrenome[i], cin[i], montant[i]);
-                            printf("\n\t\033[0;31mRetrait : %dDH.\033[0m\n\n", retrait);
+                            printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\033[0;33m *Nouveau Montant\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                            printf("\n\t\033[0;31mRetrait : %.2fDH.\033[0m\n\n", retrait);
                             printf("--------------------------------------------------------------\n");
                         } else {
-                            printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                            printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                             printf("--------------------------------------------------------------\n");
                         }
                     }
@@ -251,14 +253,14 @@ int main() {
                 if(n == 1) {// if there is only one account. Depot
                     system("cls");
                     printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
-                    printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n", nomePrenome[0], cin[0], montant[0]);
+                    printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n", nomePrenome[0], cin[0], montant[0]);
                     printf("\n--------------------------------------------------------------\n\n");
 
-                    int depot;
+                    float depot;
                     bool depotValable = true;
                      while(depotValable) {
                         printf("  Entrer le montant que tu veux le depot dans le compte : ");
-                        scanf("%d", &depot);// store the amount from the client.
+                        scanf("%f", &depot);// store the amount from the client.
                         if(depot > 0) {// checking if the input is correct.
                             montant[0] += depot;
                             depotValable = false;
@@ -270,8 +272,8 @@ int main() {
                      }
                      // display le dernier donner de compte avec le retrait.
                     system("cls");
-                    printf("\n\n\n\033[0;36m\tNome et Penome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0;33m *Nouveau Montant\033[0m\n",nomePrenome[0], cin[0], montant[0]);
-                    printf("\n\t\033[0;32mDepot : %dDH.\033[0m", depot);
+                    printf("\n\n\n\033[0;36m\tNome et Penome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\033[0;33m *Nouveau Montant\033[0m\n",nomePrenome[0], cin[0], montant[0]);
+                    printf("\n\t\033[0;32mDepot : %.2fDH.\033[0m", depot);
                     printf("\n--------------------------------------------------------------\n");
                     system("pause");
                     goto start;
@@ -282,7 +284,7 @@ int main() {
                     printf("\n\n");
                     for(int i = 0 ; i < n ; i++){ // display les comptes qui ont enregistrer.
                         printf("Compte N%d :\n", i + 1);
-                        printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                        printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                         printf("--------------------------------------------------------------\n");
                     }
                     int numCompte;
@@ -294,11 +296,11 @@ int main() {
                         scanf("%d", &numCompte);
                     }
                     numCompte--;
-                    int depot;
+                    float depot;
                     bool depotValable = true;
                     while(depotValable) {
                         printf("  Entrer le montant que tu veux le depot dans ce compte : ");
-                        scanf("%d", &depot);// store the amount from the client.
+                        scanf("%f", &depot);// store the amount from the client.
                         if(depot > 0) {// checking if the input is correct.
                             montant[numCompte] += depot;
                             depotValable = false;
@@ -314,11 +316,11 @@ int main() {
                      for(int i = 0 ; i < n ; i++){ // display les comptes qui ont enregistrer.
                         printf("Compte N%d :\n", i + 1);
                         if(i == numCompte){
-                            printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
-                            printf("\n\t\033[0;32mRetrait : %dDH.\033[0m\n\n", depot);
+                            printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
+                            printf("\n\t\033[0;32mRetrait : %.2fDH.\033[0m\n\n", depot);
                             printf("--------------------------------------------------------------\n");
                         } else {
-                            printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                            printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                             printf("--------------------------------------------------------------\n");
                         }
                     }
@@ -375,11 +377,13 @@ int main() {
                     triComptes();
                     // display the new list of accounts with sorting (tri Ascendant).
                     system("cls");
+                    int x = 1;
                     printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
                     for(int i = n-1 ; i >= 0 ; i--){ // display les comptes qui est enregistrer.
                         printf("Compte N%d :\n", x);
-                        printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                        printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                         printf("--------------------------------------------------------------\n");
+                        x++;
                     }
                     printf("  Clicker entrer pour retour ou menu.\n");
                     system("pause");
@@ -392,19 +396,17 @@ int main() {
                     int montantTri;
                     scanf("%d", &montantTri);
                     // call the sorting function.
-                    triComptes("ascendant");
-                    // display the new list of accounts with sorting (tri Ascendant).
+                    triComptes();
+                    // display the new list of accounts with sorting (tri Descendant).
                     system("cls");
+                    int x = 1;
                     printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
-                    int x = 1; // numero du compte.
                     for(int i = n-1 ; i >= 0 ; i--){ // display les comptes qui est enregistrer.
-                        if(montant[i] >= montantTri){ // check if the amount is biger of the amount that the client inter'd.
+                        if(montant[i] >= montantTri){
                             printf("Compte N%d :\n", x);
-                            printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                            printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                             printf("--------------------------------------------------------------\n");
                             x++;
-                        } else {
-                            break;
                         }
                     }
                     printf("  Clicker entrer pour retour ou menu.\n");
@@ -412,8 +414,6 @@ int main() {
                     goto start;
 
                 }
-
-
 
 
             } else if(affichageMenu == 2){ //tri par Descendant partie.
@@ -438,7 +438,7 @@ int main() {
 
                     for(int i = 0 ; i < n ; i++){ // display les comptes qui est enregistrer.
                         printf("Compte N%d :\n", i + 1);
-                        printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                        printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                         printf("--------------------------------------------------------------\n");
                     }
                     printf("  Clicker entrer pour retour ou menu.\n");
@@ -459,10 +459,8 @@ int main() {
                     for(int i = 0 ; i < n ; i++){ // display les comptes qui est enregistrer.
                         if(montant[i] >= montantTri){
                             printf("Compte N%d :\n", i + 1);
-                            printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                            printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                             printf("--------------------------------------------------------------\n");
-                        } else {
-                            break;
                         }
                     }
                     printf("  Clicker entrer pour retour ou menu.\n");
@@ -484,7 +482,7 @@ int main() {
                 for(int i = 0 ; i < n ; i++){
                     if(!strcmp(rechercheCIN, cin[i])){//strcmp is for checking if rechercheCIN value is in cin[i].
                         printf("\n  la resultat du recherche : \n");
-                        printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                        printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                         printf("\n--------------------------------------------------------------\n\n");
                         isDoneRecherche = true;
                         break;
@@ -560,8 +558,8 @@ int main() {
                     printf("\n");
                     for(int i = 0 ; i < n ; i++){ // display les comptes qui ont ajouter la Fedelisation.
                         printf("Compte N%d :\n", i + 1);
-                        printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
-                        printf("\n\t\033[0;32mFidelisation : +%dDH.\033[0m\n\n", (montant[i]/1.013) - montant[i]);
+                        printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
+                        printf("\n\t\033[0;32mFidelisation : +%.2fDH.\033[0m\n\n", montant[i] - (montant[i] / 1.013));
                         printf("--------------------------------------------------------------\n");
                     }
 
@@ -583,8 +581,8 @@ int main() {
                     printf("\n");
                     for(int i = 0 ; i < numOfFidelisation ; i++){ // display les comptes qui ont ajouter la Fedelisation.
                         printf("Compte N%d :\n", i + 1);
-                        printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
-                        printf("\n\t\033[0;32mFidelisation : +%dDH.\033[0m\n\n", montant[i] - (montant[i]/1.013));
+                        printf("\n\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\033[0m\033[0;33m *Nouveau Montant\n",nomePrenome[i], cin[i], montant[i]);
+                        printf("\n\t\033[0;32mFidelisation : +%.2fDH.\033[0m\n\n", montant[i] - (montant[i] / 1.013));
                         printf("--------------------------------------------------------------\n");
                     }
 
@@ -623,7 +621,7 @@ int main() {
                 printf(" le compte que tu entrer : \n\n");
             for(int i = 0 ; i < n ; i++){ // display les comptes qui est enregistrer.
                 printf("Compte N%d :\n", i + 1);
-                printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %dDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
+                printf("\033[0;36m\tNome et Prenome : %s.\n\tCIN : %s.\n\tMontant : %.2fDH.\033[0m\n",nomePrenome[i], cin[i], montant[i]);
                 printf("--------------------------------------------------------------\n");
             }
             printf(" le compte est regestrer, clicker entrer pour retour a la menu.\n");
