@@ -55,7 +55,7 @@ void affichageComptes(){
 
 int main() {
 
-        bool compte = false;// if false print the warning message to enter acounte first...
+        bool compte = false;// if false print the warning message to enter accounte first...
         bool usFidelisation = false;// check if he all ready use this promo.
 
 
@@ -129,14 +129,15 @@ int main() {
                 scanf("%f", &montant[n]); // registre le montant du compte bancaire;
 
                 system("cls");
-                printf("le compte que tu entrer : \n");
+                printf("\nle compte que tu entrer : \n\n");
 
                 n += newN; // assign the new size.
                 // afficher les comptes.
                 affichageComptes();
+                usFidelisation = false; // turn variable false because may add an account that have to add the fedelisation.
             }
 
-            compte = true;// turn variable true if there is atleast one acount;
+            compte = true;// turn variable true if there is atleast one account;
             system("pause");
             goto start;
 
@@ -418,7 +419,7 @@ int main() {
             printf("\n\n  choisi l\'opperation que tu veux : ");
             scanf("%d" ,&affichageMenu);
 
-            while(affichageMenu < 0 || affichageMenu > 4){ // start again if the input is not much with the Affichage menu using while loop.
+            while(affichageMenu < 0 || affichageMenu > 3){ // start again if the input is not much with the Affichage menu using while loop.
                 printf("le choix que tu a entre est pas dans le menu. voller essayer autre fois : ");
                 scanf("%d", &affichageMenu);
             }
@@ -477,6 +478,8 @@ int main() {
                     system("pause");
                     goto start;
 
+                } else if(triChoix == 3){
+                    goto start;
                 }
 
 
@@ -527,6 +530,8 @@ int main() {
                     system("pause");
                     goto start;
 
+                } else if(triChoix == 3){
+                    goto start;
                 }
 
 
@@ -698,9 +703,6 @@ int main() {
         free(cin);
         free(montant);
 
-
-
-// I NEED TO USE FLOAT OR DOUBL
 
 
     return 0;
