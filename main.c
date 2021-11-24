@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -31,6 +30,7 @@ void triComptes(){
                 strcpy(triCin, cin[j]);
                 triMontant = montant[j];
 
+                //change the indexes.
                 strcpy(nomePrenome[j], nomePrenome[i]);
                 strcpy(nomePrenome[i], triNomePrenome);
 
@@ -54,6 +54,7 @@ void affichageComptes(){
 
 
 int main() {
+
 
         bool compte = false;// if false print the warning message to enter accounte first...
         bool usFidelisation = false;// check if he all ready use this promo.
@@ -690,6 +691,12 @@ int main() {
             printf("\n\n\t\t\t\t\033[0;34m****** you exite\'s from the programe ******\033[0m\n");
             return 1;
 
+        } else {
+            char s;
+            scanf("%c", &s);
+            printf("\n  \033[0;31mce caractair est pas valable.\033[0m\n");
+            system("pause");
+            goto start;
         }
 
         for(int i = 0 ; i < n ; i++){
