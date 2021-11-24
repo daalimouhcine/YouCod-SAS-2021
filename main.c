@@ -252,7 +252,7 @@ int main() {
                             printf("\n\t\a\033[0;31mVotre argent est pas suffisant pour retrait ce montant.\033[0m\n");
                         } else if (retrait <= 0){
                             printf("\n\t\a\033[0;31mce montant est pas valable.\033[0m\n");
-                        } else if(!isdigit(retrait)) {
+                        } else {
                             printf("\n\t\a\033[0;31mEntrer un numero valable svp.\033[0m\n");
                         }
                     }
@@ -293,7 +293,7 @@ int main() {
                             printf("\n\t\a\033[0;31mVotre argent est pas suffisant pour retrait ce montant.\033[0m\n");
                         } else if (retrait <= 0){
                             printf("\n\t\a\033[0;31mce montant est pas valable.\033[0m\n");
-                        } else if(!isdigit(retrait)) {
+                        } else {
                             printf("\n\t\a\033[0;31mEntrer un numero valable svp.\033[0m\n");
                         }
                     }
@@ -692,7 +692,7 @@ int main() {
             return 1;
 
         } else {
-            char s;
+            char s;// if the input is a character.
             scanf("%c", &s);
             printf("\n  \033[0;31mce caractair est pas valable.\033[0m\n");
             system("pause");
@@ -709,8 +709,6 @@ int main() {
         free(nomePrenome);
         free(cin);
         free(montant);
-
-
 
     return 0;
 }
