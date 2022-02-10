@@ -4,7 +4,6 @@
 #include <string.h>
 
 
-
 int n = 0; // number of accounts.
 char** nomePrenome;
 char** cin;
