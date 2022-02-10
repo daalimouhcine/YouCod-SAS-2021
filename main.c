@@ -4,6 +4,7 @@
 #include <string.h>
 
 
+
 int n = 0; // number of accounts.
 char** nomePrenome;
 char** cin;
@@ -217,11 +218,11 @@ int main() {
             system("cls");
             printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
             printf("\t1-Retrait.\n\t2-Depot.\n\t3-Reteur au menu.\n");
-            int operationsMenu; // variable that store client's choice on 3)Opérations (Retrait-Dépôt).
+            int operationsMenu; // variable that store client's choice on 3)OpÃ©rations (Retrait-DÃ©pÃ´t).
             printf("\n\n Choisis l'opperation que tu veux faire : ");
             scanf("%d", &operationsMenu);
 
-            while(operationsMenu < 0 || operationsMenu > 3){ // start again if the input is not much with the Opérations menu using while loop.
+            while(operationsMenu < 0 || operationsMenu > 3){ // start again if the input is not much with the OpÃ©rations menu using while loop.
                 printf(" Le choix que tu a entre n'est pas dans le menu. voullez-vous essayer une autre fois : ");
                 scanf("%d", &operationsMenu);
             }
@@ -421,7 +422,7 @@ int main() {
             if(affichageMenu == 1){//tri par Ascendant partie.
                 system("cls");
                 printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
-                printf("\t1-Par Ordre Ascendant.\n\t2-Par Ordre Ascendant (les comptes bancaire ayant un montant supérieur à un chiffre introduit).\n\t3-Reteur au menu.\n");
+                printf("\t1-Par Ordre Ascendant.\n\t2-Par Ordre Ascendant (les comptes bancaire ayant un montant supÃ©rieur Ã  un chiffre introduit).\n\t3-Reteur au menu.\n");
                 int triChoix; //registrer le choix de tri.
                 printf("\n\n  choisi l\'opperation que tu veux : ");
                 scanf("%d", &triChoix);
@@ -480,7 +481,7 @@ int main() {
             } else if(affichageMenu == 2){ //tri par Descendant partie.
                 system("cls");
                 printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
-                printf("\t1-Par Ordre Descendant.\n\t2-Par Ordre Descendant (les comptes bancaire ayant un montant supérieur à un chiffre introduit).\n\t3-Reteur au menu.\n");
+                printf("\t1-Par Ordre Descendant.\n\t2-Par Ordre Descendant (les comptes bancaire ayant un montant supÃ©rieur Ã  un chiffre introduit).\n\t3-Reteur au menu.\n");
                 int triChoix; //registrer le choix de tri.
                 printf("\n\n  choisi l\'opperation que tu veux : ");
                 scanf("%d", &triChoix);
@@ -590,11 +591,11 @@ int main() {
             system("cls");
             printf("\n\t\t\t\t\033[0;44m      \t        \033[0;34m   Gestion Bancaire   \033[0m\033[0;44m        \t       \033[0m\n\n");
             printf("\t1-Ajouter 1.3%% aux comptes ayant les 3 premiers montants superieurs.\n\t2-Reteur au menu.\n");
-            int fidelisationMenu;// variable that store client's choice on 5)Fidélisation.
+            int fidelisationMenu;// variable that store client's choice on 5)FidÃ©lisation.
             printf("\n\n  choisi l'opperation que tu veux : ");
             scanf("%d", &fidelisationMenu);
 
-            while(fidelisationMenu < 0 || fidelisationMenu > 2){  // start again if the input is not much with the Fidélisation menu using while loop.
+            while(fidelisationMenu < 0 || fidelisationMenu > 2){  // start again if the input is not much with the FidÃ©lisation menu using while loop.
                 printf("\033[0;31m  le choix que tu a entre est pas dans le menu.\033[0m\nvoller essayer autre fois : ");
                 scanf("%d", &fidelisationMenu);
             }
